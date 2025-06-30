@@ -7,7 +7,8 @@ public class Main {
         int wybor;
 
         do {
-            System.out.println("---- MENU NAWIGACYJNE ----");
+            //DESIGN A
+            System.out.println("---- OPTIONS ----");
             System.out.println("1. Powitanie");
             System.out.println("2. Informacje");
             System.out.println("3. Wyjście");
