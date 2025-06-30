@@ -18,7 +18,7 @@ public class Main {
 
             switch (wybor) {
                 case 1:
-                    System.out.println("Hello, Git!");
+                    System.out.println("Hello, world!");
                     break;
                 case 2:
                     System.out.println("Autor: Sviatoslav Hnatiuk. V1");
