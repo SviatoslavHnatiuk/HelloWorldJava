@@ -15,6 +15,7 @@ public class Main {
             System.out.print("Wybierz opcję: ");
             wybor = scanner.nextInt();
             emptySpace();
+            slashN();
 
             switch (wybor) {
                 case 1:
@@ -31,6 +32,10 @@ public class Main {
             }
 
         } while (wybor != 3);
+    }
+
+    public static void slashN(){
+        System.out.println("\n");
     }
     public static void emptySpace() {
         for (int i = 0; i < 50; i++) {
