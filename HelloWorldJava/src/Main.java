@@ -14,7 +14,6 @@ public class Main {
             System.out.println("3. Wyjście");
             System.out.print("Wybierz opcję: ");
             wybor = scanner.nextInt();
-            emptySpace();
             slashN();
 
             switch (wybor) {
@@ -36,10 +35,5 @@ public class Main {
 
     public static void slashN(){
         System.out.println("\n");
-    }
-    public static void emptySpace() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println();
-        }
     }
 }
