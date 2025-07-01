@@ -1,5 +1,9 @@
 # Changelog
 
+##[v2.0.0] - 2025-07-01
+## Major
+- Major: stworzono nową strukturę projektu, dodano testy, klasy testowe, dodana klasa Calculator do demonstracji testów
+
 ## [v1.0.3] - 2025-06-30
 ### Major
 - Major: usunięto funkcję emptySpace()
