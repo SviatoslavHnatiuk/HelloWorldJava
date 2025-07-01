@@ -1,12 +1,11 @@
 package com;
-
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         int wybor;
+        Scanner scanner = new Scanner(System.in);
 
         do {
             //DESIGN A
@@ -16,6 +15,7 @@ public class Main {
             System.out.println("3. Wyjście");
             System.out.print("Wybierz opcję: ");
             wybor = scanner.nextInt();
+
             slashN();
 
             switch (wybor) {
@@ -37,5 +37,17 @@ public class Main {
 
     public static void slashN(){
         System.out.println("\n");
+    }
+    public static String choice(int wybor) {
+        switch (wybor) {
+            case 1:
+                return "Hello, world!";
+            case 2:
+                return "Autor: Sviatoslav Hnatiuk. V1";
+            case 3:
+                return "Koniec";
+            default:
+                return "zła liczba";
+        }
     }
 }
