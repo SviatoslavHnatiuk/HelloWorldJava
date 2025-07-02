@@ -22,7 +22,7 @@ jobs:
           docker rm app || true
 
       - name: Run new container
-        run: docker run -d --name app -p 80:8080 helloworldjava:latest
+        run: docker run -d --name app -p 80:8080 helloworldjava:latest .
 
       - name: Health check
         run: |
