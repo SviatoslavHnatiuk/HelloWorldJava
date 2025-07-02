@@ -12,9 +12,11 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        
+      - name: List repo files for debugging
+        run: ls -lR
 
       - name: Build Docker image
-        # Budujemy obraz z kontekstem w HelloWorldJava/HelloWorldJava, bo tam jest Dockerfile i out/production/HelloWorldJava/com
         run: docker build -t helloworldjava:latest HelloWorldJava/HelloWorldJava
 
       - name: Stop and remove old container if exists
