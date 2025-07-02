@@ -1,5 +1,13 @@
 # Changelog
 
+##[v2.0.4] - 2025-07-02
+#Minor
+- Dodano docker, oraz checkstyle
+
+##[v2.0.3] - 2025-07-01 
+##Minor 
+- Zaimplementowano kalkulator do klasy Main, dodano testy do zaimplemetowanej części
+
 ##[v2.0.2] - 2025-07-01 
 ##Major 
 - Usunięta klasa CalculatorTest, testy przeniesione do klasy MainTest, dodany nowy test integracyjny. Dodana funkcja power() do klasy Calculator. Dodany test funkcji power() do przeprowadzenia testów.
