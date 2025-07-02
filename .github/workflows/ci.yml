@@ -26,9 +26,9 @@ jobs:
         
     - name: Run Checkstyle
       run: |
-      java -jar HelloWorldJava/lib/checkstyle-10.26.1-all.jar \
-      -c HelloWorldJava/lib/google_checks.xml \
-      HelloWorldJava/src HelloWorldJava/Test
+        java -jar HelloWorldJava/lib/checkstyle-10.26.1-all.jar \
+        -c HelloWorldJava/lib/google_checks.xml \
+        HelloWorldJava/src HelloWorldJava/Test
       
     - name: Compile source code
       run: |
