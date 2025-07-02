@@ -26,7 +26,7 @@ jobs:
     - name: Compile source code
       run: |
         mkdir -p out/production
-        javac -classpath HelloWorldJava/lib/* -d out/production $(find HelloWorldJava/src -name "*.java")
+        javac -classpath "HelloWorldJava/lib/*" -d out/production $(find HelloWorldJava/src -name "*.java")
 
     - name: Compile tests
       run: |
