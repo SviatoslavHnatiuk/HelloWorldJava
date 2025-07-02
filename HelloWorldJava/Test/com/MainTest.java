@@ -86,4 +86,10 @@ public class MainTest {
         Calculator calc = new Calculator();
         assertThrows(ArithmeticException.class, () -> calc.divide(5, 0));
     }
+    @Test
+    void testPower() {
+        Calculator calc = new Calculator();
+        assertEquals(8, calc.power(2, 3));  // 2^3 = 8
+        assertEquals(1, calc.power(5, 0));  // każda liczba do potęgi 0 = 1
+    }
 }

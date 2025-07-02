@@ -1,5 +1,14 @@
 # Changelog
 
+##[v2.0.2] - 2025-07-01 
+##Major 
+- Usunięta klasa CalculatorTest, testy przeniesione do klasy MainTest, dodany nowy test integracyjny. Dodana funkcja power() do klasy Calculator. Dodany test funkcji power() do przeprowadzenia testów.
+
+
+##[v2.0.1] - 2025-07-01 
+##Patch 
+- Dodano brakujące biblioteki do przeprowadzenia testów, zaktualizowany plik CHANGELOG.md oraz README.md
+
 ##[v2.0.0] - 2025-07-01
 ## Major
 - Major: stworzono nową strukturę projektu, dodano testy, klasy testowe, dodana klasa Calculator do demonstracji testów
