@@ -7,17 +7,19 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # lub twój self-hosted runner label
+    runs-on: ubuntu-latest  # lub self-hosted runner label
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        
-      - name: List repo files for debugging
-        run: ls -lR
+
+      - name: Compile Java classes
+        run: |
+          mkdir -p HelloWorldJava/out/production/com
+          javac -d HelloWorldJava/out/production/com HelloWorldJava/src/com/*.java
 
       - name: Build Docker image
-        run: docker build -t helloworldjava:latest HelloWorldJava/HelloWorldJava
+        run: docker build -t helloworldjava:latest HelloWorldJava
 
       - name: Stop and remove old container if exists
         run: |
