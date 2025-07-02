@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Checkout repo
       uses: actions/checkout@v3
 
@@ -22,6 +23,16 @@ jobs:
       with:
         distribution: temurin
         java-version: 21
+
+    - name: Download Checkstyle jar
+      run: wget -O checkstyle.jar https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.26.1/checkstyle-10.26.1-all.jar
+
+    - name: Download Google Checks config
+      run: wget -O google_checks.xml https://raw.githubusercontent.com/checkstyle/checkstyle/master/src/main/resources/google_checks.xml
+
+    - name: Run Checkstyle
+      run: |
+        java -jar checkstyle.jar -c google_checks.xml HelloWorldJava/src HelloWorldJava/Test
 
     - name: Compile source code
       run: |
@@ -38,12 +49,3 @@ jobs:
         java -jar HelloWorldJava/lib/junit-platform-console-standalone-1.10.2.jar \
           -cp out/production:out/test \
           --scan-classpath --details tree
-
-    - name: Check code style
-      run: |
-        java -jar HelloWorldJava/lib/checkstyle-10.26.1.jar -c HelloWorldJava/checkstyle.xml HelloWorldJava/src
-
-    - name: Build Docker image
-      run: |
-        cd HelloWorldJava
-        docker build -t helloworldjava .
