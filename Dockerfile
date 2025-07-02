@@ -5,7 +5,7 @@ FROM eclipse-temurin:24-jdk-alpine
 WORKDIR /app
 
 #Kopiowanie skompilowanego pliku aplikacji do kontenera
-COPY HelloWorldJava/out/production/HelloWorldJava/ ./
+COPY HelloWorldJava/out/production/com ./com
 
 #Domyślne polecenie do uruchomienia aplikacji
 CMD ["java", "com.Main"]
