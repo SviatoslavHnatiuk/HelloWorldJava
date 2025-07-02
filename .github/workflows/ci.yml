@@ -1,12 +1,3 @@
-name: CI Pipeline
-
-on:
-  push:
-    branches: [ main, feature/** ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -19,17 +10,17 @@ jobs:
           java-version: '21'
 
       - name: Compile tests
-  run: |
-    mkdir -p out/test
-    javac -classpath "HelloWorldJava/lib/*:out" -d out/test $(find HelloWorldJava/Test -name "*.java")
+        run: |
+          mkdir -p out/test
+          javac -classpath "HelloWorldJava/lib/*:out" -d out/test $(find HelloWorldJava/Test -name "*.java")
 
-- name: Compile src
-  run: |
-    mkdir -p out/production
-    javac -classpath "HelloWorldJava/lib/*" -d out/production $(find HelloWorldJava/src -name "*.java")
+      - name: Compile src
+        run: |
+          mkdir -p out/production
+          javac -classpath "HelloWorldJava/lib/*" -d out/production $(find HelloWorldJava/src -name "*.java")
 
-- name: Run tests
-  run: |
-    java -jar HelloWorldJava/lib/junit-platform-console-standalone-1.10.2.jar \
-      -cp out/test:out/production \
-      --scan-classpath --details tree
+      - name: Run tests
+        run: |
+          java -jar HelloWorldJava/lib/junit-platform-console-standalone-1.10.2.jar \
+            -cp out/test:out/production \
+            --scan-classpath --details tree
