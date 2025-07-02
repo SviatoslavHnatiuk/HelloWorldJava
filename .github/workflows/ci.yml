@@ -18,19 +18,18 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Compile source
-        run: |
-          mkdir -p out
-          javac -d out $(find src -name "*.java")
-
       - name: Compile tests
-        run: |
-          mkdir -p out/test
-          javac -classpath "lib/junit-platform-console-standalone-1.10.2.jar:out" -d out/test $(find Test -name "*.java")
+	  run: |
+	    mkdir -p out/test
+	    javac -classpath "HelloWorldJava/lib/*:out" -d out/test $(find HelloWorldJava/Test -name "*.java")
 
-      - name: Run tests
-        run: |
-          java -jar lib/junit-platform-console-standalone-1.10.2.jar \
-            --class-path out:out/test \
-            --scan-classpath \
-            --details tree
+	- name: Compile src
+	  run: |
+	    mkdir -p out/production
+	    javac -classpath "HelloWorldJava/lib/*" -d out/production $(find HelloWorldJava/src -name "*.java")
+
+	- name: Run tests
+	  run: |
+	    java -jar HelloWorldJava/lib/junit-platform-console-standalone-1.10.2.jar \
+	      -cp out/test:out/production \
+	      --scan-classpath --details tree
