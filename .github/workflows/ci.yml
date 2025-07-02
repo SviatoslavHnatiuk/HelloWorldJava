@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Checkout repo
       uses: actions/checkout@v3
 
@@ -22,7 +23,13 @@ jobs:
       with:
         distribution: temurin
         java-version: 21
-
+        
+    - name: Run Checkstyle
+      run: |
+      java -jar HelloWorldJava/lib/checkstyle-10.26.1-all.jar \
+      -c HelloWorldJava/lib/google_checks.xml \
+      HelloWorldJava/src HelloWorldJava/Test
+      
     - name: Compile source code
       run: |
         mkdir -p out/production
