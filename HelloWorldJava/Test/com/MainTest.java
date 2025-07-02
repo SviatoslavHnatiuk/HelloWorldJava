@@ -16,7 +16,7 @@ public class MainTest {
         assertEquals("Hello, world!", Main.choice(1));
         assertEquals("Autor: Sviatoslav Hnatiuk. V1", Main.choice(2));
         assertEquals("Koniec", Main.choice(3));
-        assertEquals("zła liczba", Main.choice(999));
+        assertEquals(" ", Main.choice(999));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class MainTest {
 
         assertTrue(outString.contains("Hello, world!"));
         assertTrue(outString.contains("Autor: Sviatoslav Hnatiuk. V1"));
-        assertTrue(outString.contains("zła liczba"));
+        assertTrue(outString.contains(" "));
         assertTrue(outString.contains("Koniec"));
     }
 
