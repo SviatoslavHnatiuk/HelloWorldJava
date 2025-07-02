@@ -24,6 +24,10 @@ jobs:
         distribution: temurin
         java-version: 21
         
+    - name: Build Docker image
+      run: |
+        docker build -t your-dockerhub-username/helloworldjava:latest .
+        
     - name: Run Checkstyle
       run: |
         java -jar HelloWorldJava/lib/checkstyle-10.26.1-all.jar \
