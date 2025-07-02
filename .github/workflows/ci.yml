@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
     - name: Checkout repo
       uses: actions/checkout@v3
 
@@ -23,17 +22,7 @@ jobs:
       with:
         distribution: temurin
         java-version: 21
-        
-    - name: Build Docker image
-      run: |
-        docker build -t your-dockerhub-username/helloworldjava:latest .
-        
-    - name: Run Checkstyle
-      run: |
-        java -jar HelloWorldJava/lib/checkstyle-10.26.1-all.jar \
-        -c HelloWorldJava/lib/google_checks.xml \
-        HelloWorldJava/src HelloWorldJava/Test
-      
+
     - name: Compile source code
       run: |
         mkdir -p out/production
@@ -49,3 +38,12 @@ jobs:
         java -jar HelloWorldJava/lib/junit-platform-console-standalone-1.10.2.jar \
           -cp out/production:out/test \
           --scan-classpath --details tree
+
+    - name: Check code style
+      run: |
+        java -jar HelloWorldJava/lib/checkstyle-10.26.1.jar -c HelloWorldJava/checkstyle.xml HelloWorldJava/src
+
+    - name: Build Docker image
+      run: |
+        cd HelloWorldJava
+        docker build -t helloworldjava .
