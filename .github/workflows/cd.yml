@@ -2,8 +2,7 @@ name: CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -11,25 +10,34 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Compile Java classes
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Compile Java sources
         run: |
-          mkdir -p out/production/com
-          javac -d out/production/com HelloWorldJava/src/com/*.java
-          tar -czf out/production/compiled_classes.tar.gz -C out/production com
+          mkdir -p HelloWorldJava/HelloWorldJava/out/production/HelloWorldJava
+          javac -d HelloWorldJava/HelloWorldJava/out/production/HelloWorldJava $(find HelloWorldJava/HelloWorldJava/src -name "*.java")
 
-      - name: Copy compiled classes to VM via SCP
+      - name: Tar compiled classes
+        run: |
+          tar czf HelloWorldJava/HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/HelloWorldJava/out/production/HelloWorldJava .
+
+      - name: Copy compiled classes to Azure VM
         uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.AZURE_HOST }}
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "out/production/compiled_classes.tar.gz"
-          target: "~/app"
+          source: "HelloWorldJava/HelloWorldJava/out/production/compiled_classes.tar.gz"
+          target: "~/app/out/production"
 
-      - name: Run deployment script on VM via SSH
+      - name: SSH and deploy with Docker
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.AZURE_HOST }}
@@ -38,9 +46,9 @@ jobs:
           port: 22
           script: |
             cd ~/app
-            mkdir -p out/production
-            tar xzf out/production/compiled_classes.tar.gz -C out/production/
+            mkdir -p out/production/HelloWorldJava
+            tar xzf out/production/compiled_classes.tar.gz -C out/production/HelloWorldJava/
             docker stop app || true
             docker rm app || true
-            docker build -t helloworldjava:latest HelloWorldJava/
+            docker build -t helloworldjava:latest HelloWorldJava/HelloWorldJava
             docker run -d --name app -p 80:8080 helloworldjava:latest
