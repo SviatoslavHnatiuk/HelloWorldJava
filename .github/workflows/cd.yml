@@ -49,7 +49,7 @@ jobs:
             set -e
             cd ~/app
             echo "Unpacking compiled classes..."
-            mkdir -p HelloWorldJavaout/production
+            mkdir -p HelloWorldJava/out/production
             tar xzf HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/out/production/HelloWorldJava/
             echo "Creating image backup if it exists..."
             if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
