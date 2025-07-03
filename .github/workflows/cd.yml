@@ -22,7 +22,7 @@ jobs:
         working-directory: HelloWorldJava
         run: |
           mkdir -p out/production/HelloWorldJava
-          javac -d out/production/HelloWorldJava $(find HelloWorldJava/src -name "*.java")
+          javac -d out/production/HelloWorldJava $(find src -name "*.java")
 
       - name: Tar compiled classes
         run: |
