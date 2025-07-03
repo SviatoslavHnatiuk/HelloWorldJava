@@ -21,8 +21,8 @@ jobs:
       - name: Compile Java sources
         working-directory: HelloWorldJava
         run: |
-          mkdir -p HelloWorldJava/out/production/HelloWorldJava
-          javac -d HelloWorldJava/out/production/HelloWorldJava $(find HelloWorldJava/src -name "*.java")
+          mkdir -p out/production/HelloWorldJava
+          javac -d out/production/HelloWorldJava $(find HelloWorldJava/src -name "*.java")
 
       - name: Tar compiled classes
         run: |
