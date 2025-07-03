@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "HelloWorldJava/HelloWorldJava/out/production/compiled_classes.tar.gz"
+          source: "HelloWorldJava/out/production/compiled_classes.tar.gz"
           target: "~/app/HelloWorldJava/HelloWorldJava/out/production"
           
       - name: Check uploaded files on server
