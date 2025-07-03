@@ -19,9 +19,10 @@ jobs:
           distribution: 'temurin'
 
       - name: Compile Java sources
+        working-directory: HelloWorldJava
         run: |
-          mkdir -p HelloWorldJava/HelloWorldJava/out/production/HelloWorldJava
-          javac -d HelloWorldJava/HelloWorldJava/out/production/HelloWorldJava $(find HelloWorldJava/HelloWorldJava/src -name "*.java")
+          mkdir -p HelloWorldJava/out/production/HelloWorldJava
+          javac -d HelloWorldJava/out/production/HelloWorldJava $(find HelloWorldJava/src -name "*.java")
 
       - name: Tar compiled classes
         run: |
