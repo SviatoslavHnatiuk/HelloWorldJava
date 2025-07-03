@@ -24,7 +24,7 @@ jobs:
           tar czf compiled_classes.tar.gz com
 
       - name: Copy compiled classes to VM
-        uses: appleboy/scp-action@v0.1.8
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.AZURE_HOST }}
           username: ${{ secrets.AZURE_USER }}
