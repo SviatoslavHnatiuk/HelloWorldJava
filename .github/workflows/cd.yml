@@ -26,7 +26,7 @@ jobs:
 
       - name: Tar compiled classes
         run: |
-          tar czf HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/out/production/HelloWorldJava .
+          tar czf out/production/compiled_classes.tar.gz -C out/production/HelloWorldJava .
 
       - name: Copy compiled classes to Azure VM
         uses: appleboy/scp-action@v0.1.6
