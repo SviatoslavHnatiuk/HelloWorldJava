@@ -36,7 +36,7 @@ jobs:
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
           source: "HelloWorldJava/out/production/compiled_classes.tar.gz"
-          target: "~/app/out/production"
+          target: "~/app/HelloWorldJava/out/production"
 
       - name: SSH and deploy with Docker
         uses: appleboy/ssh-action@v0.1.6
@@ -49,8 +49,8 @@ jobs:
             set -e
             cd ~/app
             echo "Unpacking compiled classes..."
-            mkdir -p out/production/HelloWorldJava
-            tar xzf out/production/compiled_classes.tar.gz -C out/production/HelloWorldJava/
+            mkdir -p HelloWorldJavaout/production
+            tar xzf HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/out/production/HelloWorldJava/
             echo "Creating image backup if it exists..."
             if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
               docker tag helloworldjava:latest helloworldjava:backup
@@ -62,7 +62,7 @@ jobs:
             docker stop app || true
             docker rm app || true
             echo "Building new image..."
-            docker build -t helloworldjava:latest HelloWorldJava/HelloWorldJava
+            docker build -t helloworldjava:latest HelloWorldJava
             echo "Starting new container..."
             docker run -d --name app -p 80:8080 helloworldjava:latest
 
