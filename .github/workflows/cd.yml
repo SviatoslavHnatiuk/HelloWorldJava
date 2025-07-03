@@ -37,7 +37,7 @@ jobs:
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
           source: "HelloWorldJava/out/production/compiled_classes.tar.gz"
-          target: "~/app/HelloWorldJava/out/production"
+          target: "~/app/HelloWorldJava/HelloWorldJava/out/production"
           
       - name: Check uploaded files on server
         uses: appleboy/ssh-action@v0.1.6
@@ -48,7 +48,7 @@ jobs:
           port: 22
           script: |
             echo "Checking if compiled_classes.tar.gz exists on the server..."
-            ls -lh ~/app/HelloWorldJava/out/production/          
+            ls -lh ~/app/HelloWorldJava/HelloWorldJava/out/production/          
 
       - name: SSH and deploy with Docker
         uses: appleboy/ssh-action@v0.1.6
@@ -59,7 +59,7 @@ jobs:
           port: 22
           script: |
             set -e
-            cd ~/app
+            cd ~/app/HelloWorldJava
             echo "Unpacking compiled classes..."
             mkdir -p HelloWorldJava/out/production
             tar xzf HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/out/production/HelloWorldJava/
