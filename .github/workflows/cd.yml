@@ -108,3 +108,4 @@ jobs:
             else
               echo "No backup image available. Rollback skipped."
             fi
+
