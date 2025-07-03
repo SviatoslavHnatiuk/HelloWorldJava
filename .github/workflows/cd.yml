@@ -15,29 +15,27 @@ jobs:
 
       - name: Compile Java classes
         run: |
-          mkdir -p HelloWorldJava/out/production/com
-          javac -classpath "HelloWorldJava/lib/*" -d HelloWorldJava/out/production/com HelloWorldJava/src/com/*.java
+          mkdir -p out/production/com
+          javac -d out/production/com HelloWorldJava/src/com/*.java
+          tar -czf out/production/compiled_classes.tar.gz -C out/production com
 
-      - name: Archive compiled classes
-        run: |
-          cd HelloWorldJava/out/production
-          tar czf compiled_classes.tar.gz com
-
-      - name: Copy compiled classes to VM
-        uses: appleboy/scp-action@v0.1.7
+      - name: Copy compiled classes to VM via SCP
+        uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.AZURE_HOST }}
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
-          source: HelloWorldJava/out/production/compiled_classes.tar.gz
-          target: ~/app/out/production/
+          port: 22
+          source: "out/production/compiled_classes.tar.gz"
+          target: "~/app"
 
-      - name: Deploy and build Docker on VM via SSH
+      - name: Run deployment script on VM via SSH
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.AZURE_HOST }}
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
+          port: 22
           script: |
             cd ~/app
             mkdir -p out/production
