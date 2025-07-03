@@ -2,6 +2,10 @@ FROM eclipse-temurin:24-jdk-alpine
 
 WORKDIR /app
 
-COPY out/production/HelloWorldJava/com ./com
+COPY src ./src
+COPY lib ./lib
 
-CMD ["java","-cp", "com", "com.Main"]
+RUN mkdir -p out && \
+    javac -cp "lib/*" -d out $(find src -name "*.java")
+
+CMD ["java", "-cp", "out:lib/*", "com.Main"]

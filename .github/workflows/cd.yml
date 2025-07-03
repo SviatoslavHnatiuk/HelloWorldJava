@@ -84,7 +84,7 @@ jobs:
       - name: Rollback if health check fails
         if: failure()
         uses: appleboy/ssh-action@v0.1.6
-        with:
+          with:
           host: ${{ secrets.AZURE_HOST }}
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
@@ -100,6 +100,5 @@ jobs:
               docker run -d --name app -p 80:8080 helloworldjava:backup
               echo "Rollback completed successfully."
             else
-              echo "No backup image available. Rollback failed."
-              exit 1
+              echo "No backup image available. Rollback skipped."
             fi
