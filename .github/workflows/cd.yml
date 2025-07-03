@@ -26,7 +26,7 @@ jobs:
 
       - name: Tar compiled classes
         run: |
-          tar czf HelloWorldJava/HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/HelloWorldJava/out/production/HelloWorldJava .
+          tar czf HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/out/production/HelloWorldJava .
 
       - name: Copy compiled classes to Azure VM
         uses: appleboy/scp-action@v0.1.6
@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "HelloWorldJava/HelloWorldJava/out/production/compiled_classes.tar.gz"
+          source: "HelloWorldJava/out/production/compiled_classes.tar.gz"
           target: "~/app/out/production"
 
       - name: SSH and deploy with Docker
