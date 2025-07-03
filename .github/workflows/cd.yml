@@ -21,13 +21,13 @@ jobs:
       - name: Compile Java sources
         working-directory: HelloWorldJava
         run: |
-          mkdir -p out/production/HelloWorldJava
-          javac -d out/production/HelloWorldJava $(find src -name "*.java")
+          mkdir -p out/production
+          javac -d out/production $(find src -name "*.java")
 
       - name: Tar compiled classes
         working-directory: HelloWorldJava
         run: |
-          tar czf out/production/compiled_classes.tar.gz -C out/production/HelloWorldJava .
+          tar czf out/compiled_classes.tar.gz -C out/production .
 
       - name: Copy compiled classes to Azure VM
         uses: appleboy/scp-action@v0.1.6
@@ -36,9 +36,9 @@ jobs:
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "HelloWorldJava/out/production/compiled_classes.tar.gz"
-          target: "~/app/HelloWorldJava/HelloWorldJava/out/production"
-          
+          source: "HelloWorldJava/out/compiled_classes.tar.gz"
+          target: "~/app/HelloWorldJava/out"
+
       - name: Check uploaded files on server
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -48,7 +48,7 @@ jobs:
           port: 22
           script: |
             echo "Checking if compiled_classes.tar.gz exists on the server..."
-            ls -lh ~/app/HelloWorldJava/HelloWorldJava/out/production/          
+            ls -lh ~/app/HelloWorldJava/out/
 
       - name: SSH and deploy with Docker
         uses: appleboy/ssh-action@v0.1.6
@@ -61,8 +61,8 @@ jobs:
             set -e
             cd ~/app/HelloWorldJava
             echo "Unpacking compiled classes..."
-            mkdir -p HelloWorldJava/out/production
-            tar xzf HelloWorldJava/out/production/compiled_classes.tar.gz -C HelloWorldJava/out/production/HelloWorldJava/
+            mkdir -p out/production
+            tar xzf out/compiled_classes.tar.gz -C out/production
             echo "Creating image backup if it exists..."
             if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
               docker tag helloworldjava:latest helloworldjava:backup
@@ -74,7 +74,7 @@ jobs:
             docker stop app || true
             docker rm app || true
             echo "Building new image..."
-            docker build -t helloworldjava:latest HelloWorldJava
+            docker build -t helloworldjava:latest .
             echo "Starting new container..."
             docker run -d --name app -p 80:8080 helloworldjava:latest
 
