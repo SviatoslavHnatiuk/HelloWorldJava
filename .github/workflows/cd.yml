@@ -48,25 +48,26 @@ jobs:
             set -e
             cd ~/app
 
-            echo "Extracting compiled classes..."
+            echo "Unpacking compiled classes..."
             mkdir -p out/production/HelloWorldJava
             tar xzf out/production/compiled_classes.tar.gz -C out/production/HelloWorldJava/
 
-            echo "Backing up existing image (if any)..."
+            echo "Creating image backup if it exists..."
             if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
               docker tag helloworldjava:latest helloworldjava:backup
+              echo "Image backup saved as helloworldjava:backup"
             else
-              echo "No image to backup"
+              echo "No image to back up. This may be the first deployment."
             fi
 
             echo "Stopping and removing old container..."
             docker stop app || true
             docker rm app || true
 
-            echo "Building new Docker image..."
+            echo "Building new image..."
             docker build -t helloworldjava:latest HelloWorldJava/HelloWorldJava
 
-            echo "Running new container..."
+            echo "Starting new container..."
             docker run -d --name app -p 80:8080 helloworldjava:latest
 
       - name: Health check (CLI)
@@ -77,6 +78,7 @@ jobs:
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
           script: |
+            echo "Running health check..."
             docker exec app java -cp /app/out/production com.Main --health-check
 
       - name: Rollback if health check fails
@@ -88,14 +90,15 @@ jobs:
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
           script: |
-            echo "Health check failed. Rolling back..."
+            echo "Health check failed. Starting rollback..."
+
             docker stop app || true
             docker rm app || true
 
             if docker image inspect helloworldjava:backup > /dev/null 2>&1; then
               echo "Restoring from backup..."
               docker run -d --name app -p 80:8080 helloworldjava:backup
+              echo "Rollback completed successfully."
             else
               echo "No backup image available. Rollback failed."
               exit 1
-            fi
