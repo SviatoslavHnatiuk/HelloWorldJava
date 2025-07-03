@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY out/production/HelloWorldJava/com ./com
 
-CMD ["java", "com.Main"]
+CMD ["java", "com.Main", "/app/out/production/HelloWorldJava", "com.Main"]

@@ -4,6 +4,10 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        if (args.length > 0 && args[0].equals("--health-check")) {
+            System.out.println("OK");
+            return;
+        }
         int wybor;
         Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
