@@ -45,22 +45,57 @@ jobs:
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
           script: |
+            set -e
             cd ~/app
+
+            echo "Extracting compiled classes..."
             mkdir -p out/production/HelloWorldJava
             tar xzf out/production/compiled_classes.tar.gz -C out/production/HelloWorldJava/
+
+            echo "Backing up existing image (if any)..."
+            if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
+              docker tag helloworldjava:latest helloworldjava:backup
+            else
+              echo "No image to backup"
+            fi
+
+            echo "Stopping and removing old container..."
             docker stop app || true
             docker rm app || true
+
+            echo "Building new Docker image..."
             docker build -t helloworldjava:latest HelloWorldJava/HelloWorldJava
+
+            echo "Running new container..."
             docker run -d --name app -p 80:8080 helloworldjava:latest
-            
+
       - name: Health check (CLI)
-        run: |
-          docker exec app java -cp /app/out/production com.Main --health-check 
-          
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.AZURE_HOST }}
+          username: ${{ secrets.AZURE_USER }}
+          key: ${{ secrets.AZURE_SSH_KEY }}
+          port: 22
+          script: |
+            docker exec app java -cp /app/out/production com.Main --health-check
+
       - name: Rollback if health check fails
         if: failure()
-        run: |
-          echo "Rolling back..."
-          docker stop app || true
-          docker rm app || true
-          docker run -d --name app -p 80:8080 helloworldjava:backup
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.AZURE_HOST }}
+          username: ${{ secrets.AZURE_USER }}
+          key: ${{ secrets.AZURE_SSH_KEY }}
+          port: 22
+          script: |
+            echo "Health check failed. Rolling back..."
+            docker stop app || true
+            docker rm app || true
+
+            if docker image inspect helloworldjava:backup > /dev/null 2>&1; then
+              echo "Restoring from backup..."
+              docker run -d --name app -p 80:8080 helloworldjava:backup
+            else
+              echo "No backup image available. Rollback failed."
+              exit 1
+            fi
