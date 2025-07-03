@@ -102,3 +102,4 @@ jobs:
             else
               echo "No backup image available. Rollback failed."
               exit 1
+            fi
