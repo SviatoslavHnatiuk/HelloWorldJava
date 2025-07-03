@@ -25,6 +25,7 @@ jobs:
           javac -d out/production/HelloWorldJava $(find src -name "*.java")
 
       - name: Tar compiled classes
+        working-directory: HelloWorldJava
         run: |
           tar czf out/production/compiled_classes.tar.gz -C out/production/HelloWorldJava .
 
