@@ -14,7 +14,7 @@ public class MainTest {
     @Test
     void testChoice() {
         assertEquals("Hello, world!", Main.choice(1));
-        assertEquals("Autor: Sviatoslav Hnatiuk. V1", Main.choice(2));
+        assertEquals("Autor: Sviatoslav Hnatiuk. V3", Main.choice(2));
         assertEquals("Koniec", Main.choice(3));
         assertEquals(" ", Main.choice(999));
     }

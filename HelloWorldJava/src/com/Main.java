@@ -4,13 +4,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        if (args.length > 0 && args[0].equals("--health-check")) {
-            System.out.println("OK");
-            Thread.sleep(5000);
-            return;
-        }
         int wybor = 1;
-        Scanner scanner = new Scanner(System.in);
+       // Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
 
         do {
@@ -21,7 +16,7 @@ public class Main {
             System.out.println("3. Wyjście");
             System.out.println("4. Calculator");
             System.out.print("Wybierz opcję: ");
-            wybor = scanner.nextInt();
+            //wybor = scanner.nextInt();
 
             slashN();
 
@@ -31,11 +26,11 @@ public class Main {
                     wybor = 3;
                     break;
                 case 2:
-                    System.out.println("Autor: Sviatoslav Hnatiuk. V1");
+                    System.out.println("Autor: Sviatoslav Hnatiuk. V3");
                     break;
                 case 3:
                     System.out.println("Koniec");
-                    return;
+                    break;
                 case 4:
                     //runCalculator(scanner, calculator);
                 default:
@@ -53,61 +48,61 @@ public class Main {
             case 1:
                 return "Hello, world!";
             case 2:
-                return "Autor: Sviatoslav Hnatiuk. V1";
+                return "Autor: Sviatoslav Hnatiuk. V3";
             case 3:
                 return "Koniec";
             default:
                 return " ";
         }
     }
-//    public static void runCalculator(Scanner scanner, Calculator calculator) {
-//        int calcChoice;
-//        do {
-//            System.out.println("---- Kalkulator ----");
-//            System.out.println("1. Dodawanie");
-//            System.out.println("2. Odejmowanie");
-//            System.out.println("3. Mnożenie");
-//            System.out.println("4. Dzielenie");
-//            System.out.println("5. Potęgowanie");
-//            System.out.println("6. Powrót do menu głównego");
-//            System.out.print("Wybierz działanie: ");
-//            calcChoice = scanner.nextInt();
-//
-//            if (calcChoice >= 1 && calcChoice <= 5) {
-//                System.out.print("Podaj pierwszą liczbę: ");
-//                int a = scanner.nextInt();
-//                System.out.print("Podaj drugą liczbę: ");
-//                int b = scanner.nextInt();
-//
-//                try {
-//                    int result = 0;
-//                    switch (calcChoice) {
-//                        case 1:
-//                            result = calculator.add(a, b);
-//                            break;
-//                        case 2:
-//                            result = calculator.subtract(a, b);
-//                            break;
-//                        case 3:
-//                            result = calculator.multiply(a, b);
-//                            break;
-//                        case 4:
-//                            result = calculator.divide(a, b);
-//                            break;
-//                        case 5:
-//                            result = calculator.power(a, b);
-//                            break;
-//                    }
-//                    System.out.println("Wynik: " + result);
-//                } catch (ArithmeticException e) {
-//                    System.out.println("Błąd: " + e.getMessage());
-//                }
-//            } else if (calcChoice != 6) {
-//                System.out.println("Niepoprawny wybór.");
-//            }
-//
-//            slashN();
-//
-//        } while (calcChoice != 6);
-//    }
+    public static void runCalculator(Scanner scanner, Calculator calculator) {
+        int calcChoice;
+        do {
+            System.out.println("---- Kalkulator ----");
+            System.out.println("1. Dodawanie");
+            System.out.println("2. Odejmowanie");
+            System.out.println("3. Mnożenie");
+            System.out.println("4. Dzielenie");
+            System.out.println("5. Potęgowanie");
+            System.out.println("6. Powrót do menu głównego");
+            System.out.print("Wybierz działanie: ");
+            calcChoice = scanner.nextInt();
+
+            if (calcChoice >= 1 && calcChoice <= 5) {
+                System.out.print("Podaj pierwszą liczbę: ");
+                int a = scanner.nextInt();
+                System.out.print("Podaj drugą liczbę: ");
+                int b = scanner.nextInt();
+
+                try {
+                    int result = 0;
+                    switch (calcChoice) {
+                        case 1:
+                            result = calculator.add(a, b);
+                            break;
+                        case 2:
+                            result = calculator.subtract(a, b);
+                            break;
+                        case 3:
+                            result = calculator.multiply(a, b);
+                            break;
+                        case 4:
+                            result = calculator.divide(a, b);
+                            break;
+                        case 5:
+                            result = calculator.power(a, b);
+                            break;
+                    }
+                    System.out.println("Wynik: " + result);
+                } catch (ArithmeticException e) {
+                    System.out.println("Błąd: " + e.getMessage());
+                }
+            } else if (calcChoice != 6) {
+                System.out.println("Niepoprawny wybór.");
+            }
+
+            slashN();
+
+        } while (calcChoice != 6);
+    }
 }
