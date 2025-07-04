@@ -4,11 +4,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        if (args.length > 0 && args[0].equals("--health-check")) {
-            System.out.println("OK");
-            Thread.sleep(5000);
-            return;
-        }
+//        if (args.length > 0 && args[0].equals("--health-check")) {
+//            System.out.println("OK");
+//            Thread.sleep(5000);
+//            return;
+//        }
         int wybor = 3;
         //Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
