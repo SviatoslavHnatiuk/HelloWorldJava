@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "compiled_classes.tar.gz"
+          source: "HelloWorldJava/out/compiled_classes.tar.gz"
           target: "~/app"
 
       - name: Check uploaded files on server
@@ -58,7 +58,7 @@ jobs:
             set -e
             cd ~/app
             echo "Unpacking compiled classes..."
-            cd ~/app
+            ~/app/HelloWorldJava/out/compiled_classes.tar.gz
             tar xzf compiled_classes.tar.gz -C production
             echo "Creating image backup if it exists..."
             if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
