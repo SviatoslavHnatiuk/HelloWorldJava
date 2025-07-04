@@ -24,7 +24,7 @@ jobs:
 
       - name: Tar compiled classes
         run: |
-          tar czf HelloWorldJava/out/compiled_classes.tar.gz -C HelloWorldJava/out .
+          tar czf HelloWorldJava/out/compiled_classes.tar.gz -C HelloWorldJava/out/production .
 
       - name: Copy compiled classes to Azure VM
         uses: appleboy/scp-action@v0.1.6
@@ -56,9 +56,9 @@ jobs:
           port: 22
           script: |
             set -e
-            cd ~/app/HelloWorldJava
+            cd ~/app
             echo "Unpacking compiled classes..."
-            cd ~/app/HelloWorldJava/out
+            cd ~/app
             tar xzf compiled_classes.tar.gz -C production
             echo "Creating image backup if it exists..."
             if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
