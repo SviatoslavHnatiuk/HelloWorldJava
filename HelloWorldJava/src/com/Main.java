@@ -30,7 +30,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Koniec");
-                    break;
+                    System.exit(0);
                 case 4:
                     //runCalculator(scanner, calculator);
                 default:
