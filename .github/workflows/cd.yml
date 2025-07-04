@@ -33,8 +33,19 @@ jobs:
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "{HelloWorldJava/out/compiled_classes.tar.gz,HelloWorldJava/Dockerfile}"
+          source: "HelloWorldJava/out/compiled_classes.tar.gz"
           target: "~/app"
+
+      - name: Copy Dockerfile to Azure VM
+        uses: appleboy/scp-action@v0.1.6
+        with:
+          host: ${{ secrets.AZURE_HOST }}
+          username: ${{ secrets.AZURE_USER }}
+          key: ${{ secrets.AZURE_SSH_KEY }}
+          port: 22
+          source: "./HelloWorldJava/Dockerfile"
+          target: "~/app/HelloWorldJava"
+          strip_components: 2
 
 
 
