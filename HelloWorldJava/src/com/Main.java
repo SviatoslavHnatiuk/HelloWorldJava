@@ -8,8 +8,8 @@ public class Main {
             System.out.println("OK");
             return;
         }
-        int wybor;
-        Scanner scanner = new Scanner(System.in);
+        int wybor = 3;
+        //Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
 
         do {
@@ -20,7 +20,7 @@ public class Main {
             System.out.println("3. Wyjście");
             System.out.println("4. Calculator");
             System.out.print("Wybierz opcję: ");
-            wybor = scanner.nextInt();
+           // wybor = scanner.nextInt();
 
             slashN();
 
@@ -35,7 +35,7 @@ public class Main {
                     System.out.println("Koniec");
                     break;
                 case 4:
-                    runCalculator(scanner, calculator);
+                    //runCalculator(scanner, calculator);
                 default:
                     System.out.println(" ");
             }
