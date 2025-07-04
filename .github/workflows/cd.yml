@@ -56,9 +56,9 @@ jobs:
           port: 22
           script: |
             set -e
-            cd ~/app
+            cd ~/app/HelloWorldJava
             echo "Unpacking compiled classes..."
-            ~/app/HelloWorldJava/out/compiled_classes.tar.gz
+            mkdir -p production
             tar xzf compiled_classes.tar.gz -C production
             echo "Creating image backup if it exists..."
             if docker image inspect helloworldjava:latest > /dev/null 2>&1; then
