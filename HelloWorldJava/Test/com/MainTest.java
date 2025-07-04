@@ -33,7 +33,7 @@ public class MainTest {
     }
 
     @Test
-    void testMain_withDifferentInputs() {
+    void testMain_withDifferentInputs() throws InterruptedException {
         String simulatedInput = "1\n2\n999\n3\n";
         ByteArrayInputStream input = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(input);
