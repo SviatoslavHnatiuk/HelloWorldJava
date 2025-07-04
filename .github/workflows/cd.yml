@@ -33,18 +33,8 @@ jobs:
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "HelloWorldJava/out/compiled_classes.tar.gz"
+          source: "HelloWorldJava/out/compiled_classes.tar.gz", "HelloWorldJava/Dockerfile"
           target: "~/app"
-
-      - name: Copy project files to Azure VM
-        uses: appleboy/scp-action@v0.1.6
-        with:
-          host: ${{ secrets.AZURE_HOST }}
-          username: ${{ secrets.AZURE_USER }}
-          key: ${{ secrets.AZURE_SSH_KEY }}
-          port: 22
-          source: "HelloWorldJava/Dockerfile"
-          target: "~/app/HelloWorldJava"
 
 
 
