@@ -4,13 +4,13 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-//        if (args.length > 0 && args[0].equals("--health-check")) {
-//            System.out.println("OK");
-//            Thread.sleep(5000);
-//            return;
-//        }
+        if (args.length > 0 && args[0].equals("--health-check")) {
+            System.out.println("OK");
+            Thread.sleep(5000);
+            return;
+        }
         int wybor = 1;
-        //Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
 
         do {
@@ -21,14 +21,13 @@ public class Main {
             System.out.println("3. Wyjście");
             System.out.println("4. Calculator");
             System.out.print("Wybierz opcję: ");
-           // wybor = scanner.nextInt();
+            wybor = scanner.nextInt();
 
             slashN();
 
             switch (wybor) {
                 case 1:
                     System.out.println("Hello, world!");
-                    Thread.sleep(2000);
                     wybor = 3;
                     break;
                 case 2:
