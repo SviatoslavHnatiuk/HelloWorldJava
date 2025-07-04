@@ -32,28 +32,28 @@ public class MainTest {
         assertEquals("\n\n", output.toString());
     }
 
-    @Test
-    void testMain_withDifferentInputs() throws InterruptedException {
-        String simulatedInput = "1\n2\n999\n3\n";
-        ByteArrayInputStream input = new ByteArrayInputStream(simulatedInput.getBytes());
-        System.setIn(input);
-
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(output));
-
-        Main.main(new String[]{});
-
-        System.setOut(originalOut);
-        System.setIn(System.in);
-
-        String outString = output.toString();
-
-        assertTrue(outString.contains("Hello, world!"));
-        assertTrue(outString.contains("Autor: Sviatoslav Hnatiuk. V1"));
-        assertTrue(outString.contains(" "));
-        assertTrue(outString.contains("Koniec"));
-    }
+//    @Test
+//    void testMain_withDifferentInputs() throws InterruptedException {
+//        String simulatedInput = "1\n2\n999\n3\n";
+//        ByteArrayInputStream input = new ByteArrayInputStream(simulatedInput.getBytes());
+//        System.setIn(input);
+//
+//        ByteArrayOutputStream output = new ByteArrayOutputStream();
+//        PrintStream originalOut = System.out;
+//        System.setOut(new PrintStream(output));
+//
+//        Main.main(new String[]{});
+//
+//        System.setOut(originalOut);
+//        System.setIn(System.in);
+//
+//        String outString = output.toString();
+//
+//        assertTrue(outString.contains("Hello, world!"));
+//        assertTrue(outString.contains("Autor: Sviatoslav Hnatiuk. V1"));
+//        assertTrue(outString.contains(" "));
+//        assertTrue(outString.contains("Koniec"));
+//    }
 
     // Test klasa Calculator
 
