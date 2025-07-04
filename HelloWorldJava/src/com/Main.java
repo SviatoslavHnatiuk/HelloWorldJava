@@ -9,7 +9,7 @@ public class Main {
 //            Thread.sleep(5000);
 //            return;
 //        }
-        int wybor = 3;
+        int wybor = 1;
         //Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
 
@@ -28,13 +28,15 @@ public class Main {
             switch (wybor) {
                 case 1:
                     System.out.println("Hello, world!");
+                    Thread.sleep(5000);
+                    wybor = 3;
                     break;
                 case 2:
                     System.out.println("Autor: Sviatoslav Hnatiuk. V1");
                     break;
                 case 3:
                     System.out.println("Koniec");
-                    break;
+                    return;
                 case 4:
                     //runCalculator(scanner, calculator);
                 default:
