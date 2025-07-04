@@ -26,7 +26,7 @@ public class Main {
                     wybor = 3;
                     break;
                 case 2:
-                    System.out.println("Autor: Sviatoslav Hnatiuk. V3");
+                    System.out.println("Autor: Sviatoslav Hnatiuk. V2.0.3");
                     break;
                 case 3:
                     System.out.println("Koniec");
@@ -48,7 +48,7 @@ public class Main {
             case 1:
                 return "Hello, world!";
             case 2:
-                return "Autor: Sviatoslav Hnatiuk. V3";
+                return "Autor: Sviatoslav Hnatiuk. V2.0.3";
             case 3:
                 return "Koniec";
             default:

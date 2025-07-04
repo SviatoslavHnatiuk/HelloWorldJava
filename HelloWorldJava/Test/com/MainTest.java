@@ -14,7 +14,7 @@ public class MainTest {
     @Test
     void testChoice() {
         assertEquals("Hello, world!", Main.choice(1));
-        assertEquals("Autor: Sviatoslav Hnatiuk. V3", Main.choice(2));
+        assertEquals("Autor: Sviatoslav Hnatiuk. V2.0.3", Main.choice(2));
         assertEquals("Koniec", Main.choice(3));
         assertEquals(" ", Main.choice(999));
     }
@@ -50,7 +50,7 @@ public class MainTest {
 //        String outString = output.toString();
 //
 //        assertTrue(outString.contains("Hello, world!"));
-//        assertTrue(outString.contains("Autor: Sviatoslav Hnatiuk. V1"));
+//        assertTrue(outString.contains("Autor: Sviatoslav Hnatiuk. V2.0.3"));
 //        assertTrue(outString.contains(" "));
 //        assertTrue(outString.contains("Koniec"));
 //    }
