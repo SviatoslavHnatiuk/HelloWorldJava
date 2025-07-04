@@ -20,8 +20,8 @@ jobs:
 
       - name: Compile Java sources
         run: |
-          mkdir -p HelloWorldJava/out/production
-          javac -d HelloWorldJava/out/production $(find HelloWorldJava/src -name "*.java")
+          mkdir -p HelloWorldJava/out/
+          javac -d HelloWorldJava/out/ $(find HelloWorldJava/src -name "*.java")
 
       - name: Tar compiled classes
         run: |
@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.AZURE_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
           port: 22
-          source: "compiled_classes.tar.gz"
+          source: "HelloWorldJava/out/compiled_classes.tar.gz"
           target: "~/app/HelloWorldJava/out"
 
       - name: Check uploaded files on server
