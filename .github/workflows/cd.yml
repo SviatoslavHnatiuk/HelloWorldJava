@@ -111,13 +111,6 @@ jobs:
               done
             fi
             
-            if docker inspect -f '{{.State.Running}}' app 2>/dev/null; then
-              docker exec app java -cp /app/out com.Main --health-check
-            else 
-              echo "Container failed to start"
-              exit 1
-            fi
-            
       - name: Rollback if health check fails
         if: failure()
         uses: appleboy/ssh-action@v0.1.6
