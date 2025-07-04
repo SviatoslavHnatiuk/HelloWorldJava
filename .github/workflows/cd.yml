@@ -111,7 +111,7 @@ jobs:
               done
             fi
             
-            if docker ps | grep -q app; then
+            if docker inspect -f '{{.State.Running}}' app 2>/dev/null; then
               docker exec app java -cp /app/out com.Main --health-check
             else 
               echo "Container failed to start"
