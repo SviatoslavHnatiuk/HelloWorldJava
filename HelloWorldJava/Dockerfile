@@ -6,4 +6,4 @@ WORKDIR /app
 
 COPY production ./out
 
-CMD ["java", "-cp", "out:lib/*", "com.Main"]
+CMD ["java", "-cp", "out:lib/*", "com.Main", "--health-check"]
