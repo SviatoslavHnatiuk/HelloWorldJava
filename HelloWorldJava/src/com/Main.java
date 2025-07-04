@@ -28,7 +28,7 @@ public class Main {
             switch (wybor) {
                 case 1:
                     System.out.println("Hello, world!");
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
                     wybor = 3;
                     break;
                 case 2:
