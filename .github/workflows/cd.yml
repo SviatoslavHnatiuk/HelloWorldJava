@@ -18,16 +18,6 @@ jobs:
           java-version: '24'
           distribution: 'temurin'
 
-      - name: Create target directory on Azure VM
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.AZURE_HOST }}
-          username: ${{ secrets.AZURE_USER }}
-          key: ${{ secrets.AZURE_SSH_KEY }}
-          port: 22
-          script: |
-            mkdir -p ~/app/HelloWorldJava/out
-
       - name: Compile Java sources
         run: |
           mkdir -p HelloWorldJava/out/production
@@ -56,7 +46,7 @@ jobs:
           port: 22
           script: |
             echo "Checking if compiled_classes.tar.gz exists on the server..."
-            ls -lh ~/app/HelloWorldJava/out/
+            ls -lh ~/app/HelloWorldJava/out/production
 
       - name: SSH and deploy with Docker
         uses: appleboy/ssh-action@v0.1.6
