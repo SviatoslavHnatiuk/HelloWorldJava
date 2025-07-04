@@ -97,9 +97,12 @@ jobs:
           port: 22
           script: |
             echo "Running health check..."
-            docker ps -a | grep app
-            docker start app
+            if ! docker ps | grep -q app; then
+              echo "Starting stopped container: app"
+              docker start app
+              fi
             docker exec app java -cp /app/out com.Main --health-check
+           
 
       - name: Rollback if health check fails
         if: failure()
